@@ -1,11 +1,22 @@
-const aws = require("aws-sdk")
+const aws = require('aws-sdk')
 const ses = new aws.SES()
+const myEmail = process.env.EMAIL
 
-module.exports.send = (event, context, callback) => {
-  const myEmail = process.env.EMAIL
-  const { email, name, content } = JSON.parse(event.body)
+function generateResponse(code, payload) {
+  return {
+    statusCode: code,
+    headers: {
+      'Access-Control-Allow-Origin': 'https://adnanrahic.com',
+      'Access-Control-Allow-Headers': 'x-requested-with',
+      'Access-Control-Allow-Credentials': true,
+    },
+    body: JSON.stringify(payload)
+  }
+}
 
-  const emailParams = {
+function generateEmailParams(body) {
+  const { email, name, content } = JSON.parse(body)
+  return {
     Source: myEmail,
     Destination: {
       ToAddresses: [myEmail]
@@ -15,10 +26,7 @@ module.exports.send = (event, context, callback) => {
       Body: {
         Text: {
           Charset: "UTF-8",
-          Data: `
-            Message sent from email ${email} by ${name}
-            Content: ${content}
-          `
+          Data: `Message sent from email ${email} by ${name} \nContent: ${content}`
         }
       },
       Subject: {
@@ -27,31 +35,14 @@ module.exports.send = (event, context, callback) => {
       }
     }
   }
+}
 
-  ses.sendEmail(emailParams, (err, data) => {
-    if (err) {
-      console.log(err)
-      return callback(null, {
-        statusCode: 500,
-        headers: {
-          'Access-Control-Allow-Origin': 'https://adnanrahic.com',
-          'Access-Control-Allow-Headers': 'x-requested-with',
-          'Access-Control-Allow-Credentials': true,
-        },
-        body: JSON.stringify(err)
-      })
-    }
-
-
-    console.log(data)
-    callback(null, {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': 'https://adnanrahic.com',
-        'Access-Control-Allow-Headers': 'x-requested-with',
-        'Access-Control-Allow-Credentials': true,
-      },
-      body: JSON.stringify(data)
-    })
-  })
+module.exports.send = async (event) => {
+  try {
+    const emailParams = generateEmailParams(event.body)
+    const data = await ses.sendEmail(emailParams).promise()
+    return generateResponse(200, data)
+  } catch (err) {
+    return generateResponse(500, err)
+  }
 }
