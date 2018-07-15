@@ -1,3 +1,20 @@
+# redundand files
 handler.js
 sample.secrets.json
 package-lock.json
+serverless.yml
+readme.md
+LICENSE
+
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# secrets
+secrets.json
+
+# config
+.vscode
