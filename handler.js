@@ -36,7 +36,7 @@ function generateEmailParams (body) {
   }
 }
 
-module.exports.send = async (event) => {
+async function lambdaMailer (event) {
   try {
     const emailParams = generateEmailParams(event.body)
     const data = await ses.sendEmail(emailParams).promise()
@@ -45,3 +45,5 @@ module.exports.send = async (event) => {
     return generateResponse(500, err)
   }
 }
+
+module.exports.send = lambdaMailer
