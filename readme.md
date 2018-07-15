@@ -12,12 +12,12 @@ Simple module for receiving an email from a contact form on your website.
 ## Usage
 Configuration is rather simple. 
 
-#### 1. Enable your email address in the AWS console -> Simple Email Service.
-#### 2. Install the module:
+#### 1. Enable your email address in the AWS console -> Simple Email Service
+#### 2. Install the module
 ```bash
 $ npm i lambda-mailer
 ```
-#### 3. require it in your `handler.js`
+#### 3. `require()` it in your `handler.js`
 ```js
 // define the options for your email and domain
 const options = {
