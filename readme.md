@@ -6,6 +6,9 @@
 # Lambda Mailer
 Simple module for receiving an email from a contact form on your website.
 
+# Note!
+**Module needs Node.js version 8 or above.**
+
 ## Usage
 Configuration is rather simple. 
 
