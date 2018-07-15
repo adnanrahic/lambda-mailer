@@ -8,7 +8,7 @@ provider:
   runtime: nodejs8.10
   stage: ${self:custom.secrets.NODE_ENV}
   region: us-east-1
-  profile: agmentor
+  profile: ${self:custom.secrets.PROFILE}
   environment: 
     NODE_ENV: ${self:custom.secrets.NODE_ENV}
     EMAIL: ${self:custom.secrets.EMAIL}
