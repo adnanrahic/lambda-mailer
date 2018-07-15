@@ -6,7 +6,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "Adnan Rahić",
-  "license": "MIT"
+  "keywords": [
+    "aws",
+    "aws-lambda",
+    "aws-ses",
+    "nodejs",
+    "no-dependencies",
+    "node-module"
+  ],
+  "author": "Adnan Rahić <ado.raha198@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adnanrahic/lambda-mailer"
+  }
 }

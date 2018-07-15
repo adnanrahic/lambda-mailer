@@ -4,19 +4,19 @@ const ses = new aws.SES()
 module.exports = (options) => {
   const { myEmail, myDomain } = options
 
-  function generateResponse(code, payload) {
+  function generateResponse (code, payload) {
     return {
       statusCode: code,
       headers: {
         'Access-Control-Allow-Origin': myDomain,
         'Access-Control-Allow-Headers': 'x-requested-with',
-        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Credentials': true
       },
       body: JSON.stringify(payload)
     }
   }
 
-  function generateEmailParams(body) {
+  function generateEmailParams (body) {
     const { email, name, content } = JSON.parse(body)
     return {
       Source: myEmail,
@@ -37,7 +37,7 @@ module.exports = (options) => {
     }
   }
 
-  async function lambdaMailer(event) {
+  async function lambdaMailer (event) {
     try {
       const emailParams = generateEmailParams(event.body)
       const data = await ses.sendEmail(emailParams).promise()
