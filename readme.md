@@ -26,7 +26,11 @@ const options = {
 }
 // initialize the function
 const lambdaMailer = require('lambda-mailer')(options)
-// export the function
+
+// The event.body needs to be a JSON object with 3 properties
+// - email
+// - name
+// - content
 module.exports.send = lambdaMailer
 ```
 #### 4. Hook it up to API Gateway in the `serverless.yml`
