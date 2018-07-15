@@ -12,6 +12,7 @@ provider:
   environment: 
     NODE_ENV: ${self:custom.secrets.NODE_ENV}
     EMAIL: ${self:custom.secrets.EMAIL}
+    DOMAIN: ${self:custom.secrets.DOMAIN}
   iamRoleStatements:
     - Effect: "Allow"
       Action:
