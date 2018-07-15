@@ -3,7 +3,7 @@ const ses = new aws.SES()
 const myEmail = process.env.EMAIL
 const myDomain = process.env.DOMAIN
 
-function generateResponse(code, payload) {
+function generateResponse (code, payload) {
   return {
     statusCode: code,
     headers: {
@@ -15,13 +15,11 @@ function generateResponse(code, payload) {
   }
 }
 
-function generateEmailParams(body) {
+function generateEmailParams (body) {
   const { email, name, content } = JSON.parse(body)
   return {
     Source: myEmail,
-    Destination: {
-      ToAddresses: [myEmail]
-    },
+    Destination: { ToAddresses: [myEmail] },
     ReplyToAddresses: [email],
     Message: {
       Body: {
