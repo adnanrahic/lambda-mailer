@@ -3,6 +3,8 @@
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 ![license](https://img.shields.io/badge/eslint-standard-yellowgreen.svg)
 
+<img src="https://raw.githubusercontent.com/adnanrahic/cdn/master/lambda-mailer/lambda-mailer.png" alt="cover" width="100%">
+
 # Lambda Mailer
 Simple module for receiving an email from a contact form on your website.
 
