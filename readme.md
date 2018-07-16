@@ -21,9 +21,10 @@ $ npm i lambda-mailer
 ```js
 // define the options for your email and domain
 const options = {
-  myEmail: process.env.EMAIL,
-  myDomain: process.env.DOMAIN
+  myEmail: process.env.EMAIL, // myEmail is the email address you enabled in AWS SES in the AWS Console
+  myDomain: process.env.DOMAIN // add the domain of your website or '*' if you want to accept requests from any domain
 }
+
 // initialize the function
 const lambdaMailer = require('lambda-mailer')(options)
 
@@ -65,3 +66,21 @@ functions:
           method: post
           cors: true
 ```
+
+#### 5. Send an HTTP request to the API Gateway endpoint
+Send a POST request of the type JSON with the body as stated below. The sample below is with CURL.
+
+- request method: **POST**
+- request body type: **application/json**
+- request body: **{ email: String, name: String, content: String }**
+
+```bash
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"email":"john.doe@email.com","name":"John Doe","content":"I need some help!"}' \
+  https://{id}.execute-api.{region}.amazonaws.com/{stage}/email/send
+```
+
+---
+
+Enjoy using the module. Feel free to open issues or feature requests. :smile:
