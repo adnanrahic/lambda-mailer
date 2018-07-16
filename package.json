@@ -1,6 +1,6 @@
 {
   "name": "lambda-mailer",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Simple module for receiving an email from a contact form on your website.",
   "main": "lambdaMailer.js",
   "scripts": {
