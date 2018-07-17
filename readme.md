@@ -1,9 +1,9 @@
 ![dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)
 ![contributors](https://img.shields.io/badge/contributors-1-blue.svg)
-![license](https://img.shields.io/github/license/mashape/apistatus.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![license](https://img.shields.io/badge/eslint-standard-yellowgreen.svg)
 
-<img src="lambda-mailer.svg" alt="cover" width="100%">
+<img src="https://raw.githubusercontent.com/adnanrahic/cdn/master/lambda-mailer/lambda-mailer.png" alt="cover" width="100%">
 
 # Lambda Mailer
 Simple module for receiving an email from a contact form on your website.
