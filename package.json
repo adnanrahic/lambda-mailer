@@ -1,6 +1,6 @@
 {
   "name": "lambda-mailer",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Simple module for receiving an email from a contact form on your website.",
   "main": "lambdaMailer.js",
   "scripts": {
@@ -19,8 +19,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/adnanrahic/lambda-mailer"
-  },
-  "devDependencies": {
-    "serverless-offline": "^3.25.6"
   }
 }
