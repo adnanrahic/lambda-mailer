@@ -70,6 +70,7 @@ module.exports = (options) => {
       throw new Error('Missing parameters! Make sure to add parameters \'email\', \'name\', \'content\'.')
     }
 
+    console.log(content)
     return {
       Source: myEmail,
       Destination: { ToAddresses: [myEmail] },
