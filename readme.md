@@ -28,13 +28,22 @@ const options = {
 }
 
 // initialize the function
-const lambdaMailer = require('lambda-mailer')(options)
+const { sendJSON, sendFormEncoded } = require('lambda-mailer')(options)
 
+// Content-Type: application/json
 // The event.body needs to be a JSON object with 3 properties
 // - email
 // - name
 // - content
-module.exports.send = lambdaMailer
+module.exports.sendJSON = sendJSON
+
+// Content-Type: application/x-www-form-urlencoded
+// The event.body needs to a URI encoded string with 3 parameters
+// - email
+// - name
+// - content
+module.exports.sendFormEncoded = sendFormEncoded
+
 ```
 #### 4. Hook it up to API Gateway in the `serverless.yml`
 ```yaml
@@ -60,16 +69,24 @@ provider:
       Resource: "*"
 
 functions:
-  send:
-    handler: handler.send
+  sendJSON:
+    handler: handler.sendJSON
     events:
       - http:
-          path: email/send
+          path: email/send/json
+          method: post
+          cors: true
+  sendFormEncoded:
+    handler: handler.sendFormEncoded
+    events:
+      - http:
+          path: email/send/formencoded
           method: post
           cors: true
 ```
 
 #### 5. Send an HTTP request to the API Gateway endpoint
+
 Send a POST request of the type JSON with the body as stated below. The sample below is with CURL.
 
 - request method: **POST**
@@ -80,7 +97,29 @@ Send a POST request of the type JSON with the body as stated below. The sample b
 curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"email":"john.doe@email.com","name":"John Doe","content":"I need some help!"}' \
-  https://{id}.execute-api.{region}.amazonaws.com/{stage}/email/send
+  https://{id}.execute-api.{region}.amazonaws.com/{stage}/email/send/json
+```
+
+#### 6. Send a regular form POST request to the API Gateway endpoint
+
+Send a POST request using an HTML form. Sample below shows a simple HTML form.
+
+```html
+<form action="https://{id}.execute-api.{region}.amazonaws.com/{stage}/dev/email/send/formencoded" method="POST">
+  <input type="text" name="name" required>
+  <input type="email" name="email" required>
+  <textarea name="content" required></textarea>
+</form>
+```
+
+By default the request will redirect back to the initial page the request was sent from. You can edit the `redirectUrl` by adding it as a query string parameter. Example below.
+
+```html
+<form action="https://{id}.execute-api.{region}.amazonaws.com/{stage}/dev/email/send/formencoded?redirectUrl=https://someotherdomain.com" method="POST">
+  <input type="text" name="name" required>
+  <input type="email" name="email" required>
+  <textarea name="content" required></textarea>
+</form>
 ```
 
 ---
