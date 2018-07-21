@@ -20,10 +20,20 @@ provider:
       Resource: "*"
 
 functions:
-  send:
-    handler: handler.send
+  sendJSON:
+    handler: handler.sendJSON
     events:
       - http:
-          path: email/send
+          path: email/send/json
           method: post
           cors: true
+  sendFormEncoded:
+    handler: handler.sendFormEncoded
+    events:
+      - http:
+          path: email/send/formencoded
+          method: post
+          cors: true
+
+plugins:
+  - serverless-offline
