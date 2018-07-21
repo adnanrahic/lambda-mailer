@@ -70,7 +70,8 @@ module.exports = (options) => {
       throw new Error('Missing parameters! Make sure to add parameters \'email\', \'name\', \'content\'.')
     }
 
-    console.log(content)
+    const replacedName = name.replace(/\+/g, ' ')
+    const replacedContent = content.replace(/\+/g, ' ')
     return {
       Source: myEmail,
       Destination: { ToAddresses: [myEmail] },
@@ -79,7 +80,7 @@ module.exports = (options) => {
         Body: {
           Text: {
             Charset: 'UTF-8',
-            Data: `Message sent from email ${email} by ${name} \nContent: ${content}`
+            Data: `Message sent from email ${email} by ${replacedName} \nContent: ${replacedContent}`
           }
         },
         Subject: {
